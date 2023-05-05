@@ -1,7 +1,7 @@
 # Student_Data
 
           | Insertion   Removal   Search    Print
-          |---------------------------------------
+----------|---------------------------------------
 BST       |    Aya     Selsabeel   Basma 
 AVL       | Selsabeel   Basma     
 Min Heap  |   Basma              Selsabeel
