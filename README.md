@@ -4,8 +4,8 @@
 ----------|---------------------------------------
 BST       |    Aya     Selsabeel   Basma 
 AVL       | Selsabeel   Basma     
-Min Heap  |   Basma              Selsabeel
-Max Heap  |
+Min Heap  |   Basma       _          _      Basma
+Max Heap  |               _          _
 ---------------------------------------------------
 Main Menu |  All of Us
 Student   |  Aya
