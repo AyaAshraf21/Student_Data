@@ -7,20 +7,20 @@ using namespace std;
 class HEAP
 {
 protected:
-    vector<Student> vec;
+    vector<Student> students;
 public:
     void insert(Student item);
     void print();
-    virtual void heapify();
-    int size(){ return vec.size();}
+    virtual void heapify() = 0;
+    int size(){ return students.size();}
 };
 
-class minHEAP : protected HEAP
+class minHEAP : public HEAP
 {
     void heapify();
 };
 
-class maxHEAP : protected HEAP
+class maxHEAP : public HEAP
 {
     void heapify();
 };

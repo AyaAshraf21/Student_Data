@@ -72,3 +72,13 @@ bool Student::hasLargerGPAthan(const Student& right)
 {
 	return (this->GPA > right.GPA);
 }
+
+/*int main()
+{
+	Student s1(12, "Ramy", 3.1, "DS");
+	Student s2(14, "Ufo", 2.9, "IT");
+	Student s3(17, "Bora", 3.4, "OR");
+	Student s4(14, "Reda", 3.8, "CS");
+	cout << "Ramy == Ufo --> " << (s1==s2) << endl;
+	cout << "Ufo == Ufo --> " << (s2==s2) << endl;
+}*/

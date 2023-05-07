@@ -3,13 +3,13 @@
 
 void HEAP::insert(Student item)
 {
-    vec.push_back(item);
+    students.push_back(item);
     heapify();
 }
 
 void HEAP::print()
 {
-    for (Student student : vec)
+    for (Student student : students)
         cout << student << " ";
     cout << endl;
 }
@@ -18,9 +18,9 @@ void maxHEAP::heapify()
 {
     int CURRENT = size() - 1;
 
-    while ((CURRENT != 0) && (vec[CURRENT]).hasLargerGPAthan(vec[PARENT]))
+    while ((CURRENT != 0) && (students[CURRENT]).hasLargerGPAthan(students[PARENT]))
     {
-        swap(vec[CURRENT], vec[PARENT]);
+        swap(students[CURRENT], students[PARENT]);
         CURRENT = PARENT;
     }
 }
