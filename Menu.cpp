@@ -45,24 +45,36 @@ void Menu::mainMenu() {
 	}
 }
 
+Student Menu::getStudentInfo()
+{
+	int id;
+	string name, department;
+	float gpa;
+
+	cout << "\nEnter student data ";
+	cout << "\n\nID : ";
+	cin >> id;
+	cin.ignore();
+	cout << "Name : ";
+	getline(cin , name);
+	cout << "GPA : ";
+	cin >> gpa;
+	cin.ignore();
+	cout << "Department : ";
+	cin >> department;
+
+	Student inputStudent(id, name, gpa, department);
+	return(inputStudent);
+}
+
 
 void Menu::BST_choice(int choice) {
 	int id;
 	string name, department;
 	float gpa;
 	if (choice == 1) {
-		cout << "\nEnter student data ";
-		cout << "\n\nID : ";
-		cin >> id;
-		cin.ignore();
-		cout << "Name : ";
-		getline(cin , name);
-		cout << "GPA : ";
-		cin >> gpa;
-		cin.ignore();
-		cout << "Department : ";
-		cin >> department;
-		bst.add_student(id, name, gpa, department);
+		Student inputStudent = getStudentInfo();
+		bst.add_student(inputStudent);
 	}
 	else if (choice == 2) {
 
@@ -120,4 +132,3 @@ void Menu::max_heap_choice(int choice) {
 		mainMenu();
 	}
 }
-

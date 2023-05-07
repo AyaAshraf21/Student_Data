@@ -42,5 +42,3 @@ void Student::set_gpa(float gpa) {
 	this->GPA = gpa;
 }
 
-
-

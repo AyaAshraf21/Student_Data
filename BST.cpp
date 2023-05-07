@@ -78,8 +78,7 @@ void BST::in_order(Node* ptr) {
 }
 
 
-void BST::add_student(int id, string name, float gpa, string department) {
-	Student stud(id, name, gpa, department);
+void BST::add_student(Student stud) {
 	insert(stud);
 	cout << "The student is added" << endl;
 }

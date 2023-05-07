@@ -39,7 +39,7 @@ public:
 	bool check_file(string filename);
 	void read_file();
 	void in_order(Node* ptr);
-	void add_student(int id, string name, float gpa, string department);
+	void add_student(Student stud);
 	void remove_student(int id, string name, float gpa, string department);
 	void search_student(int id);
 	void print_all();

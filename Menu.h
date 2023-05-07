@@ -2,6 +2,7 @@
 #include <iostream>
 #include "BST.h"
 #include "AVL.h"
+#include "HEAP.h"
 
 using namespace std;
 
@@ -19,5 +20,6 @@ public:
 	void AVL_choice(int choice);
 	void min_heap_choice(int choice);
 	void max_heap_choice(int choice);
+	Student getStudentInfo();
 };
 
