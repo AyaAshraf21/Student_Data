@@ -29,6 +29,11 @@ public:
 	bool check_file(string filename);
 	void read_file(string filename);
 
-
+	friend ostream& operator<<(ostream& os, const Student& student);
+	friend bool operator>(const Student& left, const Student& right);
+	friend bool operator<(const Student& left, const Student& right);
+	friend bool operator==(const Student&left, const Student& right);
+	bool hasLargerGPAthan(const Student& right);
 };
+
 

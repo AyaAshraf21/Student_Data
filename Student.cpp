@@ -42,3 +42,33 @@ void Student::set_gpa(float gpa) {
 	this->GPA = gpa;
 }
 
+ostream& operator<<(ostream& os, const Student& student)
+{
+	os << '[' << student.ID << ", " << student.name;
+	os << ", " << student.GPA << ", " << student.department << ']';
+
+	return os;
+}
+
+bool operator==(const Student&left, const Student& right)
+{
+	return ((	left.name == right.name &&
+				left.ID == right.ID &&
+				left.department == right.department &&
+				left.GPA == right.GPA));
+}
+
+bool operator>(const Student& left, const Student& right)
+{
+	return (left.ID > right.ID);
+}
+
+bool operator<(const Student& left, const Student& right)
+{
+	return (left.ID < right.ID);
+}
+
+bool Student::hasLargerGPAthan(const Student& right)
+{
+	return (this->GPA > right.GPA);
+}

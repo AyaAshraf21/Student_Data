@@ -18,7 +18,7 @@ void maxHEAP::heapify()
 {
     int CURRENT = size() - 1;
 
-    while ((CURRENT != 0) && (vec[PARENT] < vec[CURRENT]))
+    while ((CURRENT != 0) && (vec[CURRENT]).hasLargerGPAthan(vec[PARENT]))
     {
         swap(vec[CURRENT], vec[PARENT]);
         CURRENT = PARENT;
