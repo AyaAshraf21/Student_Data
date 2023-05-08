@@ -1,12 +1,10 @@
 #include "BST.h"
 
-
-BST::BST() {
+BST::BST(vector<Student> currentStudents) {
 	root = nullptr;
-	read_file();
-
+	for(Student std: currentStudents)
+		insertPrivate(root, std);
 }
-
 
 void BST::insertPrivate(Node*& ptr, Student val) {
 	if (ptr == nullptr) {
@@ -23,8 +21,8 @@ void BST::insertPrivate(Node*& ptr, Student val) {
 	}
 }
 
-void BST::insert(Student val) {
-	insertPrivate(root, val);
+/*void BST::insert(Student newStudent) {
+	insertPrivate(root, newStudent);
 }
 
 
@@ -61,7 +59,7 @@ void BST::read_file() {
 	}
 	File.close();
 }
-
+*/
 
 void BST::in_order(Node* ptr) {
 	if (ptr == nullptr) {
@@ -69,18 +67,18 @@ void BST::in_order(Node* ptr) {
 	}
 	else {
 		in_order(ptr->left);
-		cout <<"id : " << ptr->key.get_id() <<endl;
-		cout << "name : " << ptr->key.get_name() << endl;
-		cout << "gpa : " << ptr->key.get_gpa() << endl;
-		cout << "department : " << ptr->key.get_department() << endl;
+		cout << ptr->key << endl;
 		in_order(ptr->right);
 	}
 }
 
 
-void BST::add_student(Student stud) {
-	insert(stud);
+void BST::add_student(Student newStudent) {
+	insertPrivate(root, newStudent);
 	cout << "The student is added" << endl;
 }
 
-
+void BST::print_all()
+{
+	in_order(root);
+}

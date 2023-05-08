@@ -9,7 +9,8 @@ class HEAP
 protected:
     vector<Student> students;
 public:
-    void insert(Student item);
+    HEAP(vector<Student> currentStudents);
+    void insert(Student newStudent);
     void print();
     virtual void heapify() = 0;
     int size(){ return students.size();}
@@ -17,11 +18,15 @@ public:
 
 class minHEAP : public HEAP
 {
+    public:
+    minHEAP(vector<Student> currentStudents) : HEAP(currentStudents){}
     void heapify();
 };
 
 class maxHEAP : public HEAP
 {
+    public:
+    maxHEAP(vector<Student> currentStudents) : HEAP(currentStudents){}
     void heapify();
 };
 

@@ -1,7 +1,6 @@
-#pragma once
-#include <iostream>
-#include <fstream>
-#include<string>
+#ifndef BST_H
+#define BST_H
+#include <bits/stdc++.h>
 #include "Student.h"
 
 struct Node {
@@ -30,18 +29,17 @@ private:
 	bool dir;
 
 	void insertPrivate(Node*& ptr, Student val);
-	
-
 
 public:
-	BST();
-	void insert(Student val);
-	bool check_file(string filename);
-	void read_file();
+	BST(vector<Student> currentStudents);
+	//void insert(Student newStudent);
+	//bool check_file(string filename);
+	//void read_file();
 	void in_order(Node* ptr);
-	void add_student(Student stud);
+	void add_student(Student newStudent);
 	void remove_student(int id, string name, float gpa, string department);
 	void search_student(int id);
 	void print_all();
 };
 
+#endif

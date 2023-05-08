@@ -1,4 +1,4 @@
-10
+12
 1
 Mohamed Ali
 3.4
@@ -39,4 +39,11 @@ DS
 Mohanad Bahaa
 2.9
 IT
-
+333
+Sarp
+2.4
+IS
+36
+Kera
+3.1
+IS
