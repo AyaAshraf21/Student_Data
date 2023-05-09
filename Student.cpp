@@ -1,5 +1,5 @@
 #include "Student.h"
-
+#include<algorithm>
 
 // constructor
 
@@ -36,11 +36,15 @@ void Student::set_name(string name) {
 	this->name = name;
 }
 void Student::set_department(string dep) {
-	this->department = dep;
+    transform(dep.begin(), dep.end(), dep.begin(), ::toupper);
+    // to ensure it's all stored in the same way to be counted later
+    this->department = dep;
 }
 void Student::set_gpa(float gpa) {
 	this->GPA = gpa;
 }
+
+
 
 ostream& operator<<(ostream& os, const Student& student)
 {
