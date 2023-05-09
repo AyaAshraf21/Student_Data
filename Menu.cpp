@@ -6,48 +6,48 @@ Menu::Menu()
 }
 
 void Menu::mainMenu() {
-	
-	cout << "Hello in Student Data ^_^" << endl << endl;
-	cout << "please choose Data Structure according to its number" << endl;
-	cout << "1. BST \n2. AVL \n3. Min Heap \n4. Max Heap \n5. Exit Program" << endl << endl;
-	cout << "Enter your choice: ";
-	cin >> choose;
-	if (choose == 1) {
-		cout << "Your choice is BST" << endl;
-		cout << "please Choose one of the following options according to its number" << endl;
-		cout << "1. Add student \n2. Remove student \n3. Search student \n4. Print All(sorted by id) \n5. Return to main menu" << endl;
-		cout << "Enter your choice: ";
-		cin >> num;
-		cout << "VECTOR IN MENU: " << endl;
-		BST_choice(num);
-	}
-	else if (choose == 2) {
-		cout << "Your choice is AVL" << endl;
-		cout << "please Choose one of the following options according to its number" << endl;
-		cout << "1. Add student \n2. Remove student \n3. Search student \n4. Print All(sorted by id) \n5. Return to main menu" << endl;
-		cout << "\nEnter your choice: ";
-		cin >> num;
-		AVL_choice(num);
-	}
-	else if (choose == 3) {
-		cout << "Your choice is Min Heap" << endl;
-		cout << "please Choose one of the following options according to its number" << endl;
-		cout << "1. Add student \n2. Print All(sorted by gpa) \n3. Return to main menu" << endl;
-		cout << "\nEnter your choice: ";
-		cin >> num;
-		min_heap_choice(num);
-	}
-	else if (choose == 4) {
-		cout << "Your choice is Max Heap" << endl;
-		cout << "please Choose one of the following options according to its number" << endl;
-		cout << "1. Add student \n2. Print All(sorted by gpa) \n3. Return to main menu" << endl;
-		cout << "\nEnter your choice: ";
-		cin >> num;
-		max_heap_choice(num);
-	}
-	else if (choose == 5) {
-		exit(0);
-	}
+
+    while(choose!=5){
+        cout << "Hello in Student Data ^_^" << endl << endl;
+        cout << "please choose Data Structure according to its number" << endl;
+        cout << "1. BST \n2. AVL \n3. Min Heap \n4. Max Heap \n5. Exit Program" << endl << endl;
+        cout << "Enter your choice: ";
+        cin >> choose;
+        if (choose == 1) {
+            cout << "Your choice is BST" << endl;
+            cout << "please Choose one of the following options according to its number" << endl;
+            cout << "1. Add student \n2. Remove student \n3. Search student \n4. Print All(sorted by id) \n5. Return to main menu" << endl;
+            cout << "Enter your choice: ";
+            cin >> num;
+            cout << "VECTOR IN MENU: " << endl;
+            BST_choice(num);
+        }
+        else if (choose == 2) {
+            cout << "Your choice is AVL" << endl;
+            cout << "please Choose one of the following options according to its number" << endl;
+            cout << "1. Add student \n2. Remove student \n3. Search student \n4. Print All(sorted by id) \n5. Return to main menu" << endl;
+            cout << "\nEnter your choice: ";
+            cin >> num;
+            AVL_choice(num);
+        }
+        else if (choose == 3) {
+            cout << "Your choice is Min Heap" << endl;
+            cout << "please Choose one of the following options according to its number" << endl;
+            cout << "1. Add student \n2. Print All(sorted by gpa) \n3. Return to main menu" << endl;
+            cout << "\nEnter your choice: ";
+            cin >> num;
+            min_heap_choice(num);
+        }
+        else if (choose == 4) {
+            cout << "Your choice is Max Heap" << endl;
+            cout << "please Choose one of the following options according to its number" << endl;
+            cout << "1. Add student \n2. Print All(sorted by gpa) \n3. Return to main menu" << endl;
+            cout << "\nEnter your choice: ";
+            cin >> num;
+            max_heap_choice(num);
+        }
+    }
+    exit(0);
 }
 
 Student Menu::getStudentInfo()
@@ -129,13 +129,16 @@ void Menu::BST_choice(int choice) {
 		bst.add_student(newStudent);
 	}
 	else if (choice == 2) {
-
-	}
+        int ID;
+        cout << "Id: ";
+        cin >> ID;
+        bst.remove_student(ID,students);
+    }
 	else if (choice == 3) {
 
 	}
 	else if (choice == 4) {
-		bst.print_all();
+		bst.print_all(students);
 	}
 	else if (choice == 5) {
 		mainMenu();
@@ -143,9 +146,12 @@ void Menu::BST_choice(int choice) {
 }
 
 void Menu::AVL_choice(int choice) {
+    AVL avl(students);
 	if (choice == 1) {
-
-	}
+        Student newStudent = getStudentInfo();
+        students.push_back(newStudent);
+        avl.insert(newStudent);
+    }
 	else if (choice == 2) {
 
 	}
@@ -153,7 +159,7 @@ void Menu::AVL_choice(int choice) {
 
 	}
 	else if (choice == 4) {
-
+        avl.print();
 	}
 	else if (choice == 5) {
 		mainMenu();
