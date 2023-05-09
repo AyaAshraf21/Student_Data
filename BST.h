@@ -37,9 +37,10 @@ public:
 	//void read_file();
 	void in_order(Node* ptr);
 	void add_student(Student newStudent);
-	void remove_student(int id, string name, float gpa, string department);
+    void removePrivate(Node*, int);
+    void remove_student(int, vector<Student>&);
 	void search_student(int id);
-	void print_all();
+	void print_all(vector<Student>);
 };
 
 #endif
