@@ -1,5 +1,4 @@
 #include "BST.h"
-
 BST::BST(vector<Student> currentStudents) {
 	root = nullptr;
 	for(Student std: currentStudents)
@@ -20,6 +19,67 @@ void BST::insertPrivate(Node*& ptr, Student val) {
 		}
 	}
 }
+
+void BST::removePrivate(Node* node, int id) {
+    if (node == nullptr) {
+        return;
+    }
+    else if (id < node->key.get_id()) {
+        removePrivate(node->left, id);
+    }
+    else if (id > node->key.get_id()) {
+        removePrivate(node->right, id);
+    }
+    else {
+        // Case 1: Node has no children
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
+            node = nullptr;
+        }
+            // Case 2: Node has one child
+        else if (node->left == nullptr) {
+            Node* temp = node;
+            node = node->right;
+            delete temp;
+        }
+        else if (node->right == nullptr) {
+            Node* temp = node;
+            node = node->left;
+            delete temp;
+        }
+            // Case 3: Node has two children
+        else {
+            Node* successor = node->right;
+            while (successor->left != nullptr) {
+                successor = successor->left;
+            } // find minimum
+            node->key = successor->key;
+            removePrivate(node->right, successor->key.get_id());
+        }
+    }
+}
+
+
+void BST::remove_student(int id, vector<Student>& currentStudents){
+    bool found = false;
+    for(auto it = currentStudents.begin(); it != currentStudents.end(); ++it){
+        if(it->get_id() == id){
+            cout << "Student found" << endl;
+            cout << *it << endl;
+            found = true;
+            removePrivate(root, it->get_id());
+            currentStudents.erase(it);
+            cout << "Student is deleted" << endl;
+            break;
+        }
+    }
+    if(!found){
+        cout << "Student not found." << endl;
+        return;
+    }
+}
+
+
 
 /*void BST::insert(Student newStudent) {
 	insertPrivate(root, newStudent);
@@ -78,7 +138,35 @@ void BST::add_student(Student newStudent) {
 	cout << "The student is added" << endl;
 }
 
-void BST::print_all()
+void BST::print_all(vector<Student> students)
 {
-	in_order(root);
+    in_order(root);
+    int CS_count = 0, IT_count = 0, DS_count = 0, AI_count = 0, IS_count = 0;
+    for(Student student: students){
+        string dep = student.get_department();
+        transform(dep.begin(), dep.end(), dep.begin(), ::toupper);
+        if(dep == "CS"){
+            CS_count++;
+        }
+        else if(dep == "IT"){
+            IT_count++;
+        }
+        else if(dep == "DS"){
+            DS_count++;
+        }
+        else if(dep == "AI"){
+            AI_count++;
+        }
+        else if(dep == "IS"){
+            IS_count++;
+        }
+    }
+    cout << "Department Counts:" << endl;
+    cout << "CS: " << CS_count << endl;
+    cout << "IT: " << IT_count << endl;
+    cout << "DS: " << DS_count << endl;
+    cout << "AI: " << AI_count << endl;
+    cout << "IS: " << IS_count << endl;
 }
+
+
