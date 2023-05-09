@@ -1,8 +1,9 @@
 #include "AVL.h"
 
 
-Node* AVL::createNode(Student value){
-    Node* newNode = new Node();
+
+AVL::Node* AVL::createNode(Student value){
+    AVL::Node* newNode = new Node();
     newNode->key = value;
     newNode->left = nullptr;
     newNode->right = nullptr;
@@ -10,7 +11,7 @@ Node* AVL::createNode(Student value){
     return newNode;
 }
 
-int AVL::height(Node* myNode){
+int AVL::height(AVL::Node* myNode){
     if(myNode == nullptr){
         return 0;
     }
@@ -19,11 +20,11 @@ int AVL::height(Node* myNode){
     }
 }
 
-int AVL::incrementHeight(Node* myNode){
+int AVL::incrementHeight(AVL::Node* myNode){
     myNode->height = 1+ max(height(myNode->left), height(myNode->right));
 }
 
-int AVL::getHeightDifference(Node *myNode){
+int AVL::getHeightDifference(AVL::Node *myNode){
     if(myNode == nullptr){
         return 0;
     }
@@ -35,10 +36,10 @@ int AVL::getHeightDifference(Node *myNode){
 }
 
 
-Node* AVL::leftLeftRotate(Node* parent){          //  result:         smallChild
-    Node* smallChild;                       //                   /      \
+AVL::Node* AVL::leftLeftRotate(AVL::Node* parent){          //  result:         smallChild
+    AVL::Node* smallChild;                       //                   /      \
         smallChild = parent->left;             //        bigGrandChild      parent
-    Node* bigGrandChild = smallChild->right;
+    AVL::Node* bigGrandChild = smallChild->right;
 
     parent->left = bigGrandChild;
     smallChild->right = parent;
@@ -53,9 +54,9 @@ Node* AVL::leftLeftRotate(Node* parent){          //  result:         smallChild
 
 }
 
-Node* AVL::rightRightRotate(Node* parent) {
-    Node* bigChild = parent->right;         //         bigChild
-    Node* smallGrandChild = bigChild->left;//          /       \
+AVL::Node* AVL::rightRightRotate(AVL::Node* parent) {
+    AVL::Node* bigChild = parent->right;         //         bigChild
+    AVL::Node* smallGrandChild = bigChild->left;//          /       \
                                               //       parent   smallGrandChild
     parent->right = smallGrandChild;
     bigChild->left = parent;
@@ -69,19 +70,19 @@ Node* AVL::rightRightRotate(Node* parent) {
     return bigChild;
 }
 
-Node* AVL::leftRightRotate(Node* parent){
-    Node* smallChild = parent->left;
+AVL::Node* AVL::leftRightRotate(AVL::Node* parent){
+    AVL::Node* smallChild = parent->left;
     parent->left = rightRightRotate(smallChild);
     return leftLeftRotate(parent);
 }
 
-Node* AVL::rightLeftRotate(Node* parent){
-    Node* bigChild = parent->right;
+AVL::Node* AVL::rightLeftRotate(AVL::Node* parent){
+    AVL::Node* bigChild = parent->right;
     parent->right = leftLeftRotate(bigChild);
     return rightRightRotate(parent);
 }
 
-Node* AVL::balanceTree(Node* myNode){
+AVL::Node* AVL::balanceTree(Node* myNode){
     int balanceFactor = getHeightDifference(myNode);
     if (balanceFactor > 1) {
         if (getHeightDifference(myNode->left) > 0)
@@ -98,9 +99,10 @@ Node* AVL::balanceTree(Node* myNode){
 
 }
 
-Node* AVL::insertPrivate(Node *newNode, Student newStudent) {
-    if (newNode == NULL) {
-        return createNode(newStudent);
+AVL::Node* AVL::insertPrivate(AVL::Node *newNode, Student newStudent) {
+    if (newNode == nullptr) {
+        root = createNode(newStudent);
+        return root;
     } else if (newStudent < newNode->key) {
         newNode->left = insertPrivate(newNode->left, newStudent);
         newNode = balanceTree(newNode);
@@ -110,25 +112,27 @@ Node* AVL::insertPrivate(Node *newNode, Student newStudent) {
     } return newNode;
 }
 
-Node* AVL::insert(Student newStudent) {
+AVL::Node* AVL::insert(Student newStudent) {
     insertPrivate(root, newStudent);
+    cout << "The student is added" << endl;
+
 }
 
-void AVL::printInOrder(Node* node)
+void AVL::printInOrder(AVL::Node* myNode)
 {
-    if(node != NULL)
+    if(myNode == nullptr)
     {
-        printInOrder(node->left);
-        cout << node->key << " ";
-        printInOrder(node->right);
+        return;
+    }
+
+    else {
+        printInOrder(myNode->left);
+        cout << myNode->key <<endl;
+        printInOrder(myNode->right);
+
     }
 }
 
 void AVL::print(){
-    int choice;
-    cout << "Would you like to print in order? press 1";
-    cin >> choice;
-    if(choice == 1){
-        printInOrder(root);
-    }
+    printInOrder(root);
 }
