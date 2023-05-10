@@ -19,7 +19,6 @@ void Menu::mainMenu() {
             cout << "1. Add student \n2. Remove student \n3. Search student \n4. Print All(sorted by id) \n5. Return to main menu" << endl;
             cout << "Enter your choice: ";
             cin >> num;
-            cout << "VECTOR IN MENU: " << endl;
             BST_choice(num);
         }
         else if (choose == 2) {

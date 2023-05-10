@@ -20,7 +20,6 @@ void HEAP::insert(Student newStudent)
 
 void HEAP::print()
 {
-    cout << " Inside PRINT " << endl;
     for (Student student : students)
         cout << student << endl;
 }
@@ -28,10 +27,6 @@ void HEAP::print()
 void maxHEAP::heapify()
 {
     int CURRENT = size() - 1;
-
-    cout << "The vector now after adding Student #" << students.size() << endl;
-    for (int i = 0; i < students.size(); i++)
-            cout << students[i].get_gpa() << endl;
 
     while ((CURRENT != 0) && (students[CURRENT]).hasLargerGPAthan(students[PARENT]))
     {

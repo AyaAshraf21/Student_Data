@@ -12,7 +12,7 @@ public:
     HEAP(vector<Student> currentStudents);
     void insert(Student newStudent);
     void print();
-    virtual void heapify() = 0;
+    virtual void heapify(){};
     int size(){ return students.size();}
 };
 
