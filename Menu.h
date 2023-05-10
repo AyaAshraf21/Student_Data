@@ -14,8 +14,6 @@ private:
 	int num;
 	int choose;
 	vector<Student> students;
-	//BST bst;
-	//AVL avl;
 	string dataFile = "Student_Data.txt";
 
 public:

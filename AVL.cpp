@@ -1,9 +1,14 @@
 #include "AVL.h"
 
+AVL::AVL(vector<Student> currentStudents)
+{
+    root = nullptr;
+    for (Student std: currentStudents)
+        insertPrivate(root, std);
+}
 
-
-AVL::Node* AVL::createNode(Student value){
-    AVL::Node* newNode = new Node();
+node* AVL::createNode(Student value){
+    node* newNode = new node();
     newNode->key = value;
     newNode->left = nullptr;
     newNode->right = nullptr;
@@ -11,7 +16,7 @@ AVL::Node* AVL::createNode(Student value){
     return newNode;
 }
 
-int AVL::height(AVL::Node* myNode){
+int AVL::height(node* myNode){
     if(myNode == nullptr){
         return 0;
     }
@@ -20,11 +25,11 @@ int AVL::height(AVL::Node* myNode){
     }
 }
 
-int AVL::incrementHeight(AVL::Node* myNode){
+int AVL::incrementHeight(node* myNode){
     myNode->height = 1+ max(height(myNode->left), height(myNode->right));
 }
 
-int AVL::getHeightDifference(AVL::Node *myNode){
+int AVL::getHeightDifference(node *myNode){
     if(myNode == nullptr){
         return 0;
     }
@@ -36,10 +41,10 @@ int AVL::getHeightDifference(AVL::Node *myNode){
 }
 
 
-AVL::Node* AVL::leftLeftRotate(AVL::Node* parent){          //  result:         smallChild
-    AVL::Node* smallChild;                       //                   /      \
+node* AVL::leftLeftRotate(node* parent){          //  result:         smallChild
+    node* smallChild;                       //                   /      \
         smallChild = parent->left;             //        bigGrandChild      parent
-    AVL::Node* bigGrandChild = smallChild->right;
+    node* bigGrandChild = smallChild->right;
 
     parent->left = bigGrandChild;
     smallChild->right = parent;
@@ -54,9 +59,9 @@ AVL::Node* AVL::leftLeftRotate(AVL::Node* parent){          //  result:         
 
 }
 
-AVL::Node* AVL::rightRightRotate(AVL::Node* parent) {
-    AVL::Node* bigChild = parent->right;         //         bigChild
-    AVL::Node* smallGrandChild = bigChild->left;//          /       \
+node* AVL::rightRightRotate(node* parent) {
+    node* bigChild = parent->right;         //         bigChild
+    node* smallGrandChild = bigChild->left;//          /       \
                                               //       parent   smallGrandChild
     parent->right = smallGrandChild;
     bigChild->left = parent;
@@ -70,19 +75,18 @@ AVL::Node* AVL::rightRightRotate(AVL::Node* parent) {
     return bigChild;
 }
 
-AVL::Node* AVL::leftRightRotate(AVL::Node* parent){
-    AVL::Node* smallChild = parent->left;
+node* AVL::leftRightRotate(node* parent){
+    node* smallChild = parent->left;
     parent->left = rightRightRotate(smallChild);
     return leftLeftRotate(parent);
 }
-
-AVL::Node* AVL::rightLeftRotate(AVL::Node* parent){
-    AVL::Node* bigChild = parent->right;
+node* AVL::rightLeftRotate(node* parent){
+    node* bigChild = parent->right;
     parent->right = leftLeftRotate(bigChild);
     return rightRightRotate(parent);
 }
 
-AVL::Node* AVL::balanceTree(Node* myNode){
+node* AVL::balanceTree(node* myNode){
     int balanceFactor = getHeightDifference(myNode);
     if (balanceFactor > 1) {
         if (getHeightDifference(myNode->left) > 0)
@@ -99,7 +103,7 @@ AVL::Node* AVL::balanceTree(Node* myNode){
 
 }
 
-AVL::Node* AVL::insertPrivate(AVL::Node *newNode, Student newStudent) {
+node* AVL::insertPrivate(node *newNode, Student newStudent) {
     if (newNode == nullptr) {
         root = createNode(newStudent);
         return root;
@@ -112,13 +116,13 @@ AVL::Node* AVL::insertPrivate(AVL::Node *newNode, Student newStudent) {
     } return newNode;
 }
 
-AVL::Node* AVL::insert(Student newStudent) {
+node* AVL::insert(Student newStudent) {
     insertPrivate(root, newStudent);
     cout << "The student is added" << endl;
 
 }
 
-void AVL::printInOrder(AVL::Node* myNode)
+void AVL::printInOrder(node* myNode)
 {
     if(myNode == nullptr)
     {

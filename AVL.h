@@ -1,10 +1,13 @@
+#ifndef AVL_H
+#define AVL_H
 
-#pragma once
 #include "Student.h"
-struct Node{
+#include <vector>
+
+struct node{
     Student key;
-    Node* left;
-    Node* right;
+    node* left;
+    node* right;
     int height;
 };
 
@@ -12,24 +15,22 @@ struct Node{
 class AVL
 {
 private:
-    Node* root;
+    node* root;
 public:
-    AVL(){
-        root = nullptr;
-        //read_file();
-    }
-    Node* createNode(Student value);
-    int height(Node* myNode);
-    int incrementHeight(Node* myNode);
-    int getHeightDifference(Node *myNode);
-    Node* leftLeftRotate(Node* parent);
-    Node* rightRightRotate(Node* parent);
-    Node* leftRightRotate(Node* parent);
-    Node* rightLeftRotate(Node* parent);
-    Node* balanceTree(Node* myNode);
-    Node* insertPrivate(Node *newNode, Student newStudent);
-    Node* insert(Student newStudent);
-    void printInOrder(Node*);
+    AVL(vector<Student> currentStudents);
+    node* createNode(Student value);
+    int height(node* myNode);
+    int incrementHeight(node* myNode);
+    int getHeightDifference(node *myNode);
+    node* leftLeftRotate(node* parent);
+    node* rightRightRotate(node* parent);
+    node* leftRightRotate(node* parent);
+    node* rightLeftRotate(node* parent);
+    node* balanceTree(node* myNode);
+    node* insertPrivate(node *newNode, Student newStudent);
+    node* insert(Student newStudent);
+    void printInOrder(node*);
     void print();
 };
 
+#endif
