@@ -3,8 +3,8 @@
 AVL::AVL(vector<Student> currentStudents)
 {
     root = nullptr;
-    for (Student std: currentStudents)
-        insertPrivate(root, std);
+    for (Student student: currentStudents) 
+        insertPrivate(root, student);
 }
 
 node* AVL::createNode(Student value){
@@ -13,6 +13,9 @@ node* AVL::createNode(Student value){
     newNode->left = nullptr;
     newNode->right = nullptr;
     newNode->height = 1;
+    if(root==nullptr){
+        root = newNode;
+    }
     return newNode;
 }
 
@@ -27,6 +30,7 @@ int AVL::height(node* myNode){
 
 int AVL::incrementHeight(node* myNode){
     myNode->height = 1+ max(height(myNode->left), height(myNode->right));
+    return myNode->height;
 }
 
 int AVL::getHeightDifference(node *myNode){
@@ -105,8 +109,7 @@ node* AVL::balanceTree(node* myNode){
 
 node* AVL::insertPrivate(node *newNode, Student newStudent) {
     if (newNode == nullptr) {
-        root = createNode(newStudent);
-        return root;
+        return createNode(newStudent);
     } else if (newStudent < newNode->key) {
         newNode->left = insertPrivate(newNode->left, newStudent);
         newNode = balanceTree(newNode);
