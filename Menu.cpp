@@ -173,7 +173,7 @@ void Menu::min_heap_choice(int choice) {
 		minHeap.insert(newStudent);
 	}
 	else if (choice == 2) {
-
+		minHeap.print();
 	}
 	else if (choice == 3) {
 		mainMenu();

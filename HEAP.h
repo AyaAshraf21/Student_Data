@@ -20,7 +20,7 @@ class minHEAP : public HEAP
 {
     public:
     minHEAP(vector<Student> currentStudents) : HEAP(currentStudents){}
-    void heapify();
+    void heapify(int);
 };
 
 class maxHEAP : public HEAP

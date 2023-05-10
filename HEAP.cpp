@@ -1,6 +1,8 @@
 #include "HEAP.h"
 #define PARENT (CURRENT - 1) / 2
 #define FIRST_CHILD (CURRENT * 2 + 1)
+#define SECOND_CHILD (CURRENT * 2 + 2)
+#define SIZE (students.size())
 
 HEAP::HEAP(vector<Student> currentStudents)
 {
@@ -37,15 +39,20 @@ void maxHEAP::heapify()
     }
 }
 
-void minHEAP::heapify()
+void minHEAP::heapify(int CURRENT = 0)
 {
-    //still working on it
-    int CURRENT = 0;
+    int smaller = CURRENT;
 
-    while ((CURRENT != -1) && students[CURRENT].hasLargerGPAthan(students[FIRST_CHILD]))
+    if (FIRST_CHILD < SIZE && students[CURRENT].hasLargerGPAthan(students[CURRENT]))
+        smaller = FIRST_CHILD;    
+    
+    if (SECOND_CHILD < SIZE && students[CURRENT].hasLargerGPAthan(students[SECOND_CHILD]))
+        smaller = SECOND_CHILD;    
+
+    if (smaller != CURRENT)
     {
-        swap(students[CURRENT], students[FIRST_CHILD]);
-        CURRENT = FIRST_CHILD;
+        swap(students[CURRENT], students[smaller]);
+        minHEAP::heapify(smaller);
     }
 }
 
