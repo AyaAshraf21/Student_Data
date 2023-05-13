@@ -7,6 +7,8 @@ Menu::Menu()
 
 void Menu::mainMenu() {
 
+	cout << endl << endl;
+
     while(choose!=5){
         cout << "Hello in Student Data ^_^" << endl << endl;
         cout << "please choose Data Structure according to its number" << endl;
@@ -46,7 +48,7 @@ void Menu::mainMenu() {
             max_heap_choice(num);
         }
     }
-    exit(0);
+    std::exit(0);
 }
 
 Student Menu::getStudentInfo()
@@ -129,12 +131,17 @@ void Menu::BST_choice(int choice) {
 	}
 	else if (choice == 2) {
         int ID;
-        cout << "Id: ";
+        cout << "Enter the ID: ";
         cin >> ID;
+		cout << endl;
         bst.remove_student(ID,students);
     }
 	else if (choice == 3) {
-
+		int ID;
+		cout << "Enter the ID: ";
+		cin >> ID;
+		cout << endl;
+		bst.search_student(ID);
 	}
 	else if (choice == 4) {
 		bst.print_all(students);

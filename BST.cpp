@@ -138,9 +138,8 @@ void BST::add_student(Student newStudent) {
 	cout << "The student is added" << endl;
 }
 
-void BST::print_all(vector<Student> students)
+void printDepartment(vector<Student> students)
 {
-    in_order(root);
     int CS_count = 0, IT_count = 0, DS_count = 0, AI_count = 0, IS_count = 0;
     for(Student student: students){
         string dep = student.get_department();
@@ -167,6 +166,38 @@ void BST::print_all(vector<Student> students)
     cout << "DS: " << DS_count << endl;
     cout << "AI: " << AI_count << endl;
     cout << "IS: " << IS_count << endl;
+}
+
+void BST::print_all(vector<Student> students)
+{
+    in_order(root);
+    printDepartment(students);
+}
+
+
+void BST::search_student(int id)
+{
+    Node *ptr = root;
+
+    while (ptr != nullptr)
+    {
+        if (ptr ->key.get_id() == id)
+        {
+            cout << "Student is found." << endl;
+            cout << ptr->key << endl;
+            return;
+        }
+
+        else if (ptr->key.get_id() > id)
+            ptr = ptr->left;
+        
+        else
+            ptr = ptr->right;
+
+    }
+
+    cout << "Student with ID# " << id << " not found." << endl;
+    
 }
 
 
