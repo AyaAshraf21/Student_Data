@@ -1,58 +1,70 @@
 #include "HEAP.h"
-#define PARENT (CURRENT - 1) / 2
 #define FIRST_CHILD (CURRENT * 2 + 1)
 #define SECOND_CHILD (CURRENT * 2 + 2)
 #define SIZE (students.size())
 
 HEAP::HEAP(vector<Student> currentStudents)
 {
-    cout << "INSIDE CONSTURCTOR" << endl;
     for (Student std: currentStudents)
         insert(std);
 }
 
 void HEAP::insert(Student newStudent)
 {
-    cout << "INSIDE INSERT" << endl;
     students.push_back(newStudent);
-    cout << "BEFORE HEAPIFY" << endl;
-    heapify();
-    cout << "AFTER HEAPIFY" << endl;
+    heapify(students.size() - 1, 0);
 }
 
 void HEAP::print()
 {
+    heapSort();
     for (Student student : students)
         cout << student << endl;
 }
 
-void maxHEAP::heapify()
+void maxHEAP::heapify(int Size, int CURRENT = 0)
 {
-    int CURRENT = size() - 1;
+    int larger = CURRENT;
 
-    while ((CURRENT != 0) && (students[CURRENT]).hasLargerGPAthan(students[PARENT]))
+    if (FIRST_CHILD < Size && students[FIRST_CHILD].hasLargerGPAthan(students[larger]))
+        larger = FIRST_CHILD;    
+    
+    if (SECOND_CHILD < Size && students[SECOND_CHILD].hasLargerGPAthan(students[larger]))
+        larger = SECOND_CHILD;    
+
+    if (larger != CURRENT)
     {
-        swap(students[CURRENT], students[PARENT]);
-        //cout << endl << "Swapping " << students[CURRENT] << " & " << students[PARENT] << endl;
-        //cout << CURRENT << " --> " << PARENT << endl;
-        CURRENT = PARENT;
+        swap(students[CURRENT], students[larger]);
+        maxHEAP::heapify(Size, larger);
     }
 }
 
-void minHEAP::heapify(int CURRENT = 0)
+void HEAP::heapSort()
+{
+    for (int i = SIZE / 2 - 1; i > -1; i--)
+        heapify(SIZE, i);
+    
+    for (int i = SIZE - 1; i >= 0; i--)
+    {
+        swap(students[0], students[i]);
+        heapify(i, 0);
+    }
+}
+
+void minHEAP::heapify(int Size, int CURRENT = 0)
 {
     int smaller = CURRENT;
 
-    if (FIRST_CHILD < SIZE && students[CURRENT].hasLargerGPAthan(students[CURRENT]))
+    if (FIRST_CHILD < Size && students[smaller].hasLargerGPAthan(students[FIRST_CHILD]))
         smaller = FIRST_CHILD;    
     
-    if (SECOND_CHILD < SIZE && students[CURRENT].hasLargerGPAthan(students[SECOND_CHILD]))
+    if (SECOND_CHILD < Size && students[smaller].hasLargerGPAthan(students[SECOND_CHILD]))
         smaller = SECOND_CHILD;    
 
     if (smaller != CURRENT)
     {
         swap(students[CURRENT], students[smaller]);
-        minHEAP::heapify(smaller);
+        minHEAP::heapify(Size, smaller);
     }
 }
 
@@ -66,6 +78,7 @@ void minHEAP::heapify(int CURRENT = 0)
     Student s6(1, "Ufo", 1.1, "IT");
     Student s7(7, "Bora", 2.3, "OR");
     Student s8(9, "Reda", 3.7, "CS");
+    Student s14(50, "Ada", 2.5, "IS");
 
     vector<Student> currentStudents;
     currentStudents.push_back(s1);
@@ -76,6 +89,8 @@ void minHEAP::heapify(int CURRENT = 0)
     currentStudents.push_back(s6);
     currentStudents.push_back(s7);
     currentStudents.push_back(s8);
-    maxHEAP myHeap(currentStudents);
+    minHEAP myHeap(currentStudents);
+    currentStudents.push_back(s14);
+    myHeap.insert(s14);
     myHeap.print();
 }*/

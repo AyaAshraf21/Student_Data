@@ -12,22 +12,23 @@ public:
     HEAP(vector<Student> currentStudents);
     void insert(Student newStudent);
     void print();
-    virtual void heapify(){};
+    virtual void heapify(int, int){};
     int size(){ return students.size();}
+    void heapSort();
 };
 
 class minHEAP : public HEAP
 {
     public:
     minHEAP(vector<Student> currentStudents) : HEAP(currentStudents){}
-    void heapify(int);
+    void heapify(int, int);
 };
 
 class maxHEAP : public HEAP
 {
     public:
     maxHEAP(vector<Student> currentStudents) : HEAP(currentStudents){}
-    void heapify();
+    void heapify(int, int);
 };
 
 #endif
