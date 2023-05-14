@@ -126,58 +126,124 @@ void AVL::insert(Student newStudent) {
 
 void AVL::remove(int id)
 {
-    //search(id);
+    search(id);
     removePrivate(root, id);
     cout << "Student id Deleted" << endl;
     
 }
 
-void AVL::removePrivate(node *myNode, int id) {
-    if (myNode == nullptr) {
-        return;
-    }
-    if (id < myNode->key.get_id()) {
-        removePrivate(myNode->left, id);
-    } else if (id > myNode->key.get_id()) {
-        removePrivate(myNode->right, id);
-    } else { // id == myNode->key.get_id()
-        if (myNode->left == nullptr && myNode->right == nullptr) {
-            // no child
-            delete myNode;
-            myNode = nullptr;
-        } else if (myNode->left == nullptr) {
-            // one child (right)
-            node *temp = myNode;
-            myNode = myNode->right;
-            temp->right = nullptr; // update parent pointer
-            delete temp;
-        } else if (myNode->right == nullptr) {
-            // one child (left)
-            node *temp = myNode;
-            myNode = myNode->left;
-            temp->left = nullptr; // update parent pointer
-            delete temp;
-        } else {
-            // two children
-            node *minRight = findMinNode(myNode->right);
-            myNode->key = minRight->key;
-            removePrivate(myNode->right, minRight->key.get_id());
-        }
-    
-        if (myNode != nullptr) {
-            incrementHeight(myNode);
-            myNode = balanceTree(myNode);
-        }
-    }
-
-}
-
-node *AVL::findMinNode(node *myNode)
+/* Given a non-empty binary search tree,
+return the node with minimum key value
+found in that tree. Note that the entire
+tree does not need to be searched. */
+node *AVL::findSmallestNode(node* myNode)
 {
-    if (myNode == nullptr || myNode->left == nullptr)
-        return myNode;
-
-    return (findMinNode(myNode->left));
+    node* current = myNode;
+ 
+    /* loop down to find the leftmost leaf */
+    while (current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+ 
+// Recursive function to delete a node
+// with given key from subtree with
+// given root. It returns root of the
+// modified subtree.
+node* AVL::removePrivate(node* root, int id)
+{
+     
+    // STEP 1: PERFORM STANDARD BST DELETE
+    if (root == NULL)
+        return root;
+ 
+    // If the key to be deleted is smaller
+    // than the root's key, then it lies
+    // in left subtree
+    if (id < root->key.get_id())
+        root->left = removePrivate(root->left, id);
+ 
+    // If the key to be deleted is greater
+    // than the root's key, then it lies
+    // in right subtree
+    else if(id > root->key.get_id())
+        root->right = removePrivate(root->right, id);
+ 
+    // if key is same as root's key, then
+    // This is the node to be deleted
+    else
+    {
+        // node with only one child or no child
+        if( (root->left == NULL) ||
+            (root->right == NULL) )
+        {
+            node *temp = root->left ? root->left : root->right;
+ 
+            // No child case
+            if (temp == NULL)
+            {
+                temp = root;
+                root = NULL;
+            }
+            else // One child case
+                *root = *temp; // Copy the contents of the non-empty child
+            free(temp);
+        }
+        else
+        {
+            // node with two children: Get the inorder
+            // successor (smallest in the right subtree)
+            node* temp = findSmallestNode(root->right);
+ 
+            // Copy the inorder successor's
+            // data to this node
+            root->key = temp->key;
+ 
+            // Delete the inorder successor
+            root->right = removePrivate(root->right, temp->key.get_id());
+        }
+    }
+ 
+    // If the tree had only one node
+    // then return
+    if (root == NULL)
+        return root;
+ 
+    // STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
+    incrementHeight(root);
+ 
+    // STEP 3: GET THE BALANCE FACTOR OF
+    // THIS NODE (to check whether this
+    // node became unbalanced)
+    int balance = getHeightDifference(root);
+ 
+    // If this node becomes unbalanced,
+    // then there are 4 cases
+ 
+    // Left Left Case
+    if (balance > 1 && getHeightDifference(root->left) >= 0)
+        return leftLeftRotate(root);
+ 
+    // Left Right Case
+    if (balance > 1 && getHeightDifference(root->left) < 0)
+    {
+        root->left = rightRightRotate(root->left);
+        return leftLeftRotate(root);
+    }
+ 
+    // Right Right Case
+    if (balance < -1 && getHeightDifference(root->right) <= 0)
+        return rightRightRotate(root);
+ 
+    // Right Left Case
+    if (balance < -1 && getHeightDifference(root->right) > 0)
+    {
+        root->right = leftLeftRotate(root->right);
+        return rightRightRotate(root);
+    }
+ 
+    return root;
 }
 
 
@@ -216,38 +282,4 @@ void AVL::search(int id)
 
 void AVL::print(){
     printInOrder(root);
-}
-
-int main()
-{
-    Student s1(12, "Ramy", 3.1, "DS");
-    Student s2(14, "Ufo", 2.9, "IT");
-    Student s3(17, "Bora", 3.4, "OR");
-    Student s4(18, "Reda", 3.8, "CS");
-    Student s5(13, "Gamal", 2.6, "DS");
-    Student s6(1, "LA", 1.1, "IT");
-    Student s7(7, "BlaBla", 2.3, "OR");
-    Student s8(9, "Rengar", 3.7, "CS");
-    Student s14(50, "Ada", 2.5, "IS");
-
-    vector<Student> currentStudents;
-    currentStudents.push_back(s1);
-    currentStudents.push_back(s2);
-    currentStudents.push_back(s3);
-    currentStudents.push_back(s4);
-    currentStudents.push_back(s5);
-    currentStudents.push_back(s6);
-    currentStudents.push_back(s7);
-    currentStudents.push_back(s8);
-    AVL myAVL(currentStudents);
-    currentStudents.push_back(s14);
-    cout << "Adding Ada: " << endl;
-    myAVL.insert(s14);
-    myAVL.print();
-    cout << "Search for Ada: " << endl;
-    myAVL.search(50);
-    cout << "Removing Ada: " << endl;
-    myAVL.remove(50);
-    myAVL.print();
-    cout << "All Right" << endl;
 }
