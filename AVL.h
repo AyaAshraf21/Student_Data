@@ -16,6 +16,7 @@ class AVL
 {
 private:
     node* root;
+    node* findMinNode(node *myNode);
 public:
     AVL(vector<Student> currentStudents);
     node* createNode(Student value);
@@ -29,6 +30,9 @@ public:
     node* balanceTree(node* myNode);
     node* insertPrivate(node *newNode, Student newStudent);
     void insert(Student newStudent);
+    void remove(int id);
+    void removePrivate(node *root, int key);
+    void search(int id);
     void printInOrder(node*);
     void print();
 };

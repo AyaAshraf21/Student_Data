@@ -142,6 +142,7 @@ void Menu::BST_choice(int choice) {
 	}
 	else if (choice == 4) {
 		bst.print_all(students);
+		printDepartment(students);
 	}
 	else if (choice == 5) {
 		mainMenu();
@@ -156,13 +157,18 @@ void Menu::AVL_choice(int choice) {
         avl.insert(newStudent);
     }
 	else if (choice == 2) {
-
+		int ID;
+		cout << "Enter the ID: ";
+		cin >> ID;
+		cout << endl;
+		avl.remove(ID);
 	}
 	else if (choice == 3) {
 
 	}
 	else if (choice == 4) {
         avl.print();
+		printDepartment(students);
 	}
 	else if (choice == 5) {
 		mainMenu();
@@ -178,6 +184,7 @@ void Menu::min_heap_choice(int choice) {
 	}
 	else if (choice == 2) {
 		minHeap.print();
+		printDepartment(students);
 	}
 	else if (choice == 3) {
 		mainMenu();
@@ -194,10 +201,41 @@ void Menu::max_heap_choice(int choice) {
 	}
 	else if (choice == 2) {
 		maxHeap.print();
+		printDepartment(students);
 	}
 	else if (choice == 3) {
 		mainMenu();
 	}
+}
+
+void Menu::printDepartment(vector<Student> students)
+{
+    int CS_count = 0, IT_count = 0, DS_count = 0, AI_count = 0, IS_count = 0;
+    for(Student student: students){
+        string dep = student.get_department();
+        transform(dep.begin(), dep.end(), dep.begin(), ::toupper);
+        if(dep == "CS"){
+            CS_count++;
+        }
+        else if(dep == "IT"){
+            IT_count++;
+        }
+        else if(dep == "DS"){
+            DS_count++;
+        }
+        else if(dep == "AI"){
+            AI_count++;
+        }
+        else if(dep == "IS"){
+            IS_count++;
+        }
+    }
+    cout << "Department Counts:" << endl;
+    cout << "CS: " << CS_count << endl;
+    cout << "IT: " << IT_count << endl;
+    cout << "DS: " << DS_count << endl;
+    cout << "AI: " << AI_count << endl;
+    cout << "IS: " << IS_count << endl;
 }
 
 Menu::~Menu()

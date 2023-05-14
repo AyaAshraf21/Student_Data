@@ -31,6 +31,7 @@ public:
 		for (Student std: vec)
 			cout << std << " ";
 	}
+	void printDepartment(vector<Student> students);
 	~Menu();
 };
 
