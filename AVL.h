@@ -28,7 +28,7 @@ public:
     node* rightLeftRotate(node* parent);
     node* balanceTree(node* myNode);
     node* insertPrivate(node *newNode, Student newStudent);
-    node* insert(Student newStudent);
+    void insert(Student newStudent);
     void printInOrder(node*);
     void print();
 };

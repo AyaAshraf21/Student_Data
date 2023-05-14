@@ -7,10 +7,8 @@ Menu::Menu()
 
 void Menu::mainMenu() {
 
-	cout << endl << endl;
-
     while(choose!=5){
-        cout << "Hello in Student Data ^_^" << endl << endl;
+        cout << "\n\n\t\tHello in Student Data ^_^" << endl << endl;
         cout << "please choose Data Structure according to its number" << endl;
         cout << "1. BST \n2. AVL \n3. Min Heap \n4. Max Heap \n5. Exit Program" << endl << endl;
         cout << "Enter your choice: ";
@@ -48,7 +46,6 @@ void Menu::mainMenu() {
             max_heap_choice(num);
         }
     }
-    std::exit(0);
 }
 
 Student Menu::getStudentInfo()

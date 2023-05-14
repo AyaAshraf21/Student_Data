@@ -119,10 +119,9 @@ node* AVL::insertPrivate(node *newNode, Student newStudent) {
     } return newNode;
 }
 
-node* AVL::insert(Student newStudent) {
+void AVL::insert(Student newStudent) {
     insertPrivate(root, newStudent);
     cout << "The student is added" << endl;
-
 }
 
 void AVL::printInOrder(node* myNode)
