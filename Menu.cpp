@@ -164,7 +164,11 @@ void Menu::AVL_choice(int choice) {
 		avl.remove(ID);
 	}
 	else if (choice == 3) {
-
+		int ID;
+		cout << "Enter the ID: ";
+		cin >> ID;
+		cout << endl;
+		avl.search(ID);
 	}
 	else if (choice == 4) {
         avl.print();
