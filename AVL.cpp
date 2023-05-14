@@ -45,8 +45,8 @@ int AVL::getHeightDifference(node *myNode){
 }
 
 
-node* AVL::leftLeftRotate(node* parent){          //  result:   smallChild
-    node* smallChild;                                /*         /      \        */
+node* AVL::leftLeftRotate(node* parent){          //  result:         smallChild
+    node* smallChild;                       //                   /      /
     smallChild = parent->left;             //        bigGrandChild      parent
     node* bigGrandChild = smallChild->right;
 
